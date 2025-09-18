@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Reachout</string>
+    <string name="topbasicsignup">Hey there</string>
+    <string name="topbasicsignin">Welcome Back</string>
+    <string name="createaccount">Create an Account</string>
+    <string name="loginaccount">Log In to Your Account</string>
+    <string name="welcomeback">Welcome Back</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="hidepassword">Hide Password</string>
+    <string name="showpassword">Show Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="gotologin">Already have an account? Login</string>
+    <string name="gotoregister">Don\'t have an account? Register</string>
+
+</resources>

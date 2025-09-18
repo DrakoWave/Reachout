@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "710198628248",
+    "project_id": "r-e-a-c-h-o-u-t",
+    "storage_bucket": "r-e-a-c-h-o-u-t.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710198628248:android:0134c0ba32c6138a2225ed",
+        "android_client_info": {
+          "package_name": "com.example.reachout"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAGI3k2iu9ndGjVYPXIeStWRqpsRtFHgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
