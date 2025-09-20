@@ -5,9 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import app.component.nav
-import screen.Defaultviewofsignup
-import screen.signup
-import screen.signin
 
 
 class MainActivity : ComponentActivity() {

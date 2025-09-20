@@ -1,15 +1,9 @@
 package app.component
 
-import android.graphics.drawable.Icon
-import android.graphics.pdf.content.PdfPageGotoLinkContent
-import android.renderscript.Sampler
 import android.util.Log
-import android.widget.ImageButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -21,11 +15,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Label
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,12 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -52,7 +40,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -62,9 +49,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.reachout.R
-import org.intellij.lang.annotations.JdkConstants
-import screen.signin
-import screen.signup
+import com.example.reachout.ui.screen.signin
+import com.example.reachout.ui.screen.signup
 
 @Composable
 fun Normal(value: String) {
@@ -101,23 +87,17 @@ fun Title(value: String) {
 }
 
 @Composable
-fun Textfieldcomp(value: String,iconval: Int) {
-    val textVal= remember{
-        mutableStateOf("")
-    }
-
+fun Textfieldcomp(value: String, onValueChange:(String)-> Unit, iconval: Int, label: String) {
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(4.dp))
             .alpha(0.5F)
             .padding(bottom = 5.dp),
-        label= {Text(text=value) },
+        label= {Text(text=label) },
         keyboardOptions = KeyboardOptions.Default,
-        value = textVal.value,
-        onValueChange = {
-            textVal.value=it
-        },
+        value = value,
+        onValueChange = onValueChange,
         leadingIcon = {
             Icon(painter = painterResource(id=iconval), contentDescription = "", Modifier
                 .size(30.dp)
@@ -128,11 +108,7 @@ fun Textfieldcomp(value: String,iconval: Int) {
 }
 
 @Composable
-fun Passwordcomp(value: String,iconval: Int) {
-
-    val textVal= remember{
-        mutableStateOf("")
-    }
+fun Passwordcomp(value: String, onValueChange: (String)-> Unit, iconval: Int, label: String) {
     val passwordVisibility= remember {
         mutableStateOf(false)
     }
@@ -144,15 +120,13 @@ fun Passwordcomp(value: String,iconval: Int) {
             .alpha(0.5F)
             .padding(bottom = 5.dp),
 
-        label= {Text(text=value) },
+        label= {Text(text=label) },
 
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
 
-        value = textVal.value,
+        value = value,
 
-        onValueChange = {
-            textVal.value=it
-        },
+        onValueChange = onValueChange,
 
         leadingIcon = {
             Icon(painter = painterResource(id=iconval), contentDescription = "", Modifier
@@ -179,7 +153,7 @@ fun Passwordcomp(value: String,iconval: Int) {
             IconButton(onClick = {passwordVisibility.value=!passwordVisibility.value}) {
                 Icon(imageVector=Eye, contentDescription = description)
             }
-            
+
         },
 
         visualTransformation = if(passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation()
@@ -190,9 +164,9 @@ fun Passwordcomp(value: String,iconval: Int) {
 }
 
 @Composable
-fun clickable(value: String) {
+fun clickable(value: String,onClick:()-> Unit) {
 
-    Button(onClick = {},
+    Button(onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(45.dp)
@@ -226,10 +200,10 @@ fun clickable(value: String) {
                     )
                 )
             }
-        
+
     }
 
-    
+
 }
 
 @Composable
