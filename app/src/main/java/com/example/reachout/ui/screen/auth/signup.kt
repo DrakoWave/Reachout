@@ -1,7 +1,6 @@
-package com.example.reachout.ui.screen
+package com.example.reachout.ui.screen.auth
 
 import android.util.Log
-import android.widget.Button
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,20 +15,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import app.component.Title
-import app.component.Normal
-import app.component.Textfieldcomp
-import app.component.Passwordcomp
-import app.component.clickable
-import app.component.clickablelogintext
-import app.component.spacer
+import com.example.reachout.ui.common.Title
+import com.example.reachout.ui.common.Normal
+import com.example.reachout.ui.common.Textfieldcomp
+import com.example.reachout.ui.common.Passwordcomp
+import com.example.reachout.ui.common.clickable
+import com.example.reachout.ui.common.clickablelogintext
+import com.example.reachout.ui.common.spacer
 import com.example.reachout.R
-import viewmodels.AuthViewModel
 
 
 // composible for signup page
 @Composable
 fun signup(onSignInClick: () -> Unit={},
+           onregistersuccess:()->Unit={},
            viewModel: AuthViewModel= viewModel()
 )
 {
@@ -46,6 +45,9 @@ fun signup(onSignInClick: () -> Unit={},
     val password= remember{
         mutableStateOf("")
     }
+    val role= remember{
+        mutableStateOf("")
+    }
 
     Surface (  //area for interface
         modifier = Modifier.fillMaxSize()
@@ -58,19 +60,21 @@ fun signup(onSignInClick: () -> Unit={},
             Title(value=stringResource(id = R.string.createaccount))
             spacer()
             Textfieldcomp(value=firstname.value,onValueChange={firstname.value=it}, iconval = R.drawable.profilepic,label="firstname")  //TextField for First name
-            Textfieldcomp(value=lastname.value,onValueChange={lastname.value=it}, iconval = R.drawable.profilepic,label="labelname")   //TextField for Last Name
+            Textfieldcomp(value=lastname.value,onValueChange={lastname.value=it}, iconval = R.drawable.profilepic,label="lastname")   //TextField for Last Name
             Textfieldcomp(value=email.value,onValueChange={email.value=it}, iconval = R.drawable.emailicon,label="email")   //TextField for Email
             Passwordcomp(value=password.value,onValueChange={password.value=it}, iconval = R.drawable.password,label="password")  //TextField for Password
+            Textfieldcomp(value=role.value,onValueChange={role.value=it}, iconval = R.drawable.profilepic,label="role")
             spacer()
             spacer()
             clickablelogintext(onSignUpClick = onSignInClick)
 
             clickable(value=stringResource(id=R.string.register),
                 onClick={
-                    viewModel.signup(email.value,password.value)
+                    viewModel.signup(email.value,password.value,firstname.value,lastname.value,role=role.value)
                     {success,error->
                         if (success) {
-                            Log.d("Auth", "Signed up user: ${firstname.value} ${lastname.value}, Email: ${email.value}")
+                            Log.d("Auth", "Signed up user: ${firstname.value} ${lastname.value}, Email: ${email.value},Role:${role.value}")
+                            onregistersuccess()
                         } else {
                             Log.e("Auth", "Signup failed: $error")
                         }
@@ -87,5 +91,5 @@ fun signup(onSignInClick: () -> Unit={},
 @Preview
 @Composable
 fun Defaultviewofsignup() {
-//   signup()
+  signup()
 }

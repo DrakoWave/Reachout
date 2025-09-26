@@ -1,4 +1,4 @@
-package com.example.reachout.ui.screen
+package com.example.reachout.ui.screen.auth
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -15,19 +15,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import app.component.Normal
-import app.component.Passwordcomp
-import app.component.Textfieldcomp
-import app.component.Title
-import app.component.clickable
-import app.component.clickableregistertext
-import app.component.spacer
+import com.example.reachout.ui.common.Normal
+import com.example.reachout.ui.common.Passwordcomp
+import com.example.reachout.ui.common.Textfieldcomp
+import com.example.reachout.ui.common.Title
+import com.example.reachout.ui.common.clickable
+import com.example.reachout.ui.common.clickableregistertext
+import com.example.reachout.ui.common.spacer
 import com.example.reachout.R
-import viewmodels.AuthViewModel
+import com.example.reachout.ui.screen.home.Home
 
 
 @Composable
 fun signin(onSignUpClick: () -> Unit={},
+           onloginsuccess:()-> Unit={},
            viewModel: AuthViewModel= viewModel()
 )
 {
@@ -63,6 +64,7 @@ fun signin(onSignUpClick: () -> Unit={},
                     {success,error->
                         if (success) {
                             Log.d("Auth","Email: ${email.value}")
+                            onloginsuccess()
                         } else {
                             Log.e("Auth","Signup failed: $error")
                         }
@@ -76,5 +78,5 @@ fun signin(onSignUpClick: () -> Unit={},
 @Preview
 @Composable
 fun Defaultsviewofignin() {
-    //signin()
+    signin()
 }
